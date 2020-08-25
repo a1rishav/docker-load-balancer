@@ -4,7 +4,7 @@ import requests
 
 app = Flask(__name__)
 
-ip = "172.19.0.1"
+ip = "172.17.0.1"
 ports = [4500, 4501, 4502, 4503]
 global_counter = 0
 
@@ -19,11 +19,12 @@ def square():
 
 @app.route('/distribute_square/')
 def distribute_square():
+    global global_counter
     n = int(request.args.get("n"))
     port = ports[global_counter % len(ports)]
     url = "http://{}:{}/square/?n={}".format(ip, port, n)
     
-    message = "Square of {} --> request sent to -->  machine : {}:{}".format(ip, port)
+    message = "Square of {} --> request sent to -->  machine : {}:{}".format(n, ip, port)
     result = requests.get(url = url).json()
     response = message + " ---> Respose received : {}".format(result)
     global_counter += 1
