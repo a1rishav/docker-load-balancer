@@ -1,0 +1,50 @@
+Build -->
+	  docker build -t image_name:tag_name -f dockerfile .	
+	  docker build -t python-app:exerciseA -f dockerfile .
+Run -->  docker run --name python-app-exerciseA python-app:exerciseA
+
+
+
+
+
+Theory :
+
+Images can exist without containers, whereas a container needs to run an image to exist.
+Therefore, containers are dependent on images and use them to construct a run-time environment and run an application
+
+If we don't mention tag name, it's by "latest" by default
+
+
+
+Docker commands :
+
+docker images
+docker ps
+docker ps -a --> more info 
+docker ps -q --> containers terminated abnormally
+docker ps -qa --> terminated containers
+docker logs container id --> logs are stored in disk
+docker logs conatainer name --> logs are stored in disk
+docker inspect container_id
+docker run --rm --> remove container after it's work is done
+docker rmi -f image --> delete image 
+docker run -d --> run in background (daemon mode)
+docker exec -it container_id command --> execute command in docker
+docker exec -it container_id bash --> login in docker
+delete all containers --> docker rm -f $(docker ps -qa) && docker rmi -f $(docker images -qa)
+docker -v --> mount
+docker stats --> check stats of all containers
+
+docker tag <<image-name>>:<<tag-name>> <<user-name>>/<<repo-name>>:<<tag-name>>
+docker push <<user-name>>/<<repo-name>>
+
+Example :
+	docker tag volumes-tests-flask:v1 urishav/first_repo:flask_image_test
+	docker push urishav/first_repo
+
+Delete conatiner
+docker rm -rf $(docker ps -qa)
+
+Dockerfile commands :
+
+ADD --> can copy files, download links
